@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:core';
-import 'package:headlines/whatever.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:headlines/explorenews.dart';
@@ -25,15 +24,15 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff464fff),// changed the background color
+        backgroundColor: const Color(0xff464646),
         appBar: AppBar(
-          elevation: 40,
-          backgroundColor: const Color(0xffff3090),//changed the appbar color
+          elevation: 0,
+          backgroundColor: const Color(0xff000000),
           centerTitle: true,
           title: const Text(
-            "Some Title",//changed the title
+            "HEADLINES",
             style: TextStyle(
-              fontSize: 40,//changed the font size
+              fontSize: 29,
               color: Color(0xffffffff),
               letterSpacing: 3,
               fontWeight: FontWeight.bold,
@@ -42,20 +41,19 @@ class _NewsPageState extends State<NewsPage> {
         ),
         body: ListView.builder(
           itemCount: listArticle.length,
-          //shrinkWrap: true, // commented out shrinkWrap
+          shrinkWrap: true,
           itemBuilder: (_, index) {
             return Container(
-              margin: const EdgeInsets.all(25),// changed the margin
+              margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.purple,// changed the color to purple
-                 image: DecorationImage(
-                   image: NetworkImage(listArticle[index].urlToImage),
-                   fit: BoxFit.fill,
-                 ),
-                borderRadius: BorderRadius.circular(20),//changed the border radius
+                image: DecorationImage(
+                  image: NetworkImage(listArticle[index].urlToImage),
+                  fit: BoxFit.fill,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
               width: MediaQuery.of(context).size.width,
-              height: 300,//changed the height of the container
+              height: 250,
               child: InkWell(
                 onTap: () {
                   Navigator.push(
@@ -64,11 +62,10 @@ class _NewsPageState extends State<NewsPage> {
                       builder: (context) => ExploreNews(
                         article: listArticle[index],
                       ),
-
                     ),
                   );
                 },
-                borderRadius: BorderRadius.circular(20.0),//changed the border radius
+                borderRadius: BorderRadius.circular(12.0),
                 child: Stack(
                   children: [
                     Container(
@@ -88,7 +85,7 @@ class _NewsPageState extends State<NewsPage> {
                         children: [
                           Text(
                             listArticle[index].title,
-                            maxLines: 4,//changed the no of lines that can be displayed
+                            maxLines: 3,
                             style: const TextStyle(
                               fontSize: 20,
                               color: Color(0xfff2f2f2),
@@ -102,19 +99,18 @@ class _NewsPageState extends State<NewsPage> {
                               Text(
                                 listArticle[index].source['name'],
                                 style: const TextStyle(
-                                  fontSize: 18,//increased font size
+                                  fontSize: 12,
                                   color: Color(0xffbababa),
                                 ),
                               ),
-                              const SizedBox(width: 20),//changed the size of the size box
-                              //CircleAvatar(),
-                              // Text(
-                              //   listArticle[index].publishedAt.split("T").first,
-                              //   style: const TextStyle(
-                              //     fontSize: 12,
-                              //     color: Color(0xffbababa),
-                              //   ),
-                              // )
+                              const SizedBox(width: 10),
+                              Text(
+                                listArticle[index].publishedAt.split("T").first,
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Color(0xffbababa),
+                                ),
+                              )
                             ],
                           )
                         ],
